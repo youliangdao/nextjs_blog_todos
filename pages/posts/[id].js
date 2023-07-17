@@ -5,7 +5,7 @@ import { getAllPostIds, getPostData } from "../../lib/posts";
 
 export default function Post({ post }) {
   const router = useRouter();
-  if (!post) {
+  if (router.isFallback || !post) {
     return <div>Loading...</div>;
   }
   return (
@@ -39,15 +39,13 @@ export default function Post({ post }) {
     </Layout>
   );
 }
-
 export async function getStaticPaths() {
   const paths = await getAllPostIds();
   return {
     paths,
-    fallback: ,
+    fallback: true,
   };
 }
-
 export async function getStaticProps({ params }) {
   const post = await getPostData(params.id);
   return {
