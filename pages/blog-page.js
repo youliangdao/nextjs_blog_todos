@@ -35,9 +35,8 @@ export default function BlogPage({ filteredPosts }) {
 
 export async function getStaticProps() {
   const filteredPosts = await getAllPostsData();
-  console.log(filteredPosts);
   return {
     props: { filteredPosts },
-    revalidate: 3,
+    revalidate: 100,
   };
 }
